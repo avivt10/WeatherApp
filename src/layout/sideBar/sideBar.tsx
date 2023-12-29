@@ -1,5 +1,4 @@
 import './Sidebar.css';
-import 'bootstrap/dist/css/bootstrap.min.css';
 import StarIcon from '../../assets/icons/star';
 import WeatherIcon from '../../assets/icons/weather';
 import WindIcon from '../../assets/icons/wind';
@@ -12,9 +11,17 @@ const Sidebar = () => {
 
   return (
       <ul className="nav flex-column">
-      {icons.map((el) => (
-            <li className="nav-item mb-5">
-              <a className="nav-link active">{el}</a>
+      {icons.map((item,id) => (
+            <li key={id} className="nav-item">
+              {
+                id === 0 ? 
+                <a className="nav-link active mb-5">{item}</a> 
+                :
+                <div>
+                  <a className="">{item}</a> 
+                </div>
+              }
+             
             </li>
           ))}
       </ul>

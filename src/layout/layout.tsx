@@ -9,7 +9,9 @@ const Layout = () => {
                     <SideBar />
                 </div>
             </div>
+            <>
             <Outlet />
+            </>
         </div>
     );
 };

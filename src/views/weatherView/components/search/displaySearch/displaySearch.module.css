@@ -1,0 +1,11 @@
+.displayList{
+    width: 50%;
+    margin:auto;
+    overflow-y: scroll;
+    margin-top: 15px;
+    max-height: 100px;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 15px #ddd;
+  
+}
