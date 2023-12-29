@@ -7,11 +7,10 @@ import style from "./weatherView.module.css"
 
 const WeatherView = () => {
   return (
-    <div className="w-75">
+    <div className="w-100">
       <div className={style.searchContainer}>
         <Search/>
       </div>
-        {/* <DisplaySearch/> */}
         <WeatherWidget/>
         <FullForecast/>
         <AirConditions/>

@@ -4,8 +4,7 @@ const searchSlice = createSlice({
     name:'search',
     initialState:false,
     reducers:{
-
     }
 })
 
-export default searchSlice;
+export default searchSlice.reducer;
