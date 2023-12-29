@@ -1,13 +1,16 @@
-import React from "react";
 import { Outlet } from "react-router-dom";
 import SideBar from "./sideBar";
 
 const Layout = () => {
     return (
-        <React.Fragment>
-            <SideBar/>
+        <div className="d-flex">
+            <div className="sidebar">
+                <div className="inner-sidebar">
+                    <SideBar />
+                </div>
+            </div>
             <Outlet />
-        </React.Fragment>
+        </div>
     );
 };
 
