@@ -1,10 +1,11 @@
 import { configureStore } from '@reduxjs/toolkit';
-import searchSlice from './features/searchSlice';
+import favoriteSlice from './features/favoriteSlice';
 
-const store = configureStore({
+export type AppDispatch = typeof store.dispatch;
+export type RootState = ReturnType<typeof store.getState>;
+
+export const store = configureStore({
     reducer: {
-        searchSlice
+        favoriteSlice
     }
 });
-
-export default store;

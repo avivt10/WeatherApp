@@ -9,6 +9,7 @@ const Search = () => {
     const [input, setInput] = useState("");
     const [results, setResults] = useState<ISearchModel[]>([]);
     const [favorites, setFavorites] = useState<string[]>([]);
+    
     const fetch = async (value: string) => {
         try {
             const res = await axios(`https://jsonplaceholder.typicode.com/todos/`)
