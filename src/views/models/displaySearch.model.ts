@@ -3,5 +3,4 @@ export interface IDisplaySearchModel {
     id: string;
     title: string;
     userId: string;
-
 }
