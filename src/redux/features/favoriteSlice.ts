@@ -1,5 +1,5 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit"
-import { favoritesListModel, favoritePropsModel } from "../models/favorite.model";
+import { favoritesListModel, favoritePropsModel, favoritesIdModel } from "../models/favorite.model";
 
 const initialState: favoritesListModel = {
   favorites: []

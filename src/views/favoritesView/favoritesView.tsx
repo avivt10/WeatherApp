@@ -1,6 +1,9 @@
+import FavoritesList from "./components/favoritesList/favoritesList";
 const FavoritesView = () => {
     return (
-        <div>FavoritesView</div>
+        <>
+          <FavoritesList/>
+        </>
     );
 };
 

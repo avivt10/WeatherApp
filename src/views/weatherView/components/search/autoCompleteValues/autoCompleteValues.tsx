@@ -1,6 +1,9 @@
 import { ISearchModel } from "../../../../models/search.model";
 import style from "./autoCompleteValues.module.css"
 import StarIcon from "../../../../../assets/icons/starIcon";
+import { useAppDispatch } from "../../../../../redux/hooks";
+import { onAddFavorite } from "../../../../../redux/features/favoriteSlice";
+import { favoritePropsModel } from "../../../../../redux/models/favorite.model";
 
 interface autoCompleteValuesModel {
     results: ISearchModel[],
@@ -8,12 +11,19 @@ interface autoCompleteValuesModel {
     setFavorites: React.Dispatch<React.SetStateAction<string[]>>,
 }
 
-const AutoCompleteValues = ({results, favorites, setFavorites} : autoCompleteValuesModel) => {
+const AutoCompleteValues = ({ results, favorites, setFavorites }: autoCompleteValuesModel) => {
+    const dispatch = useAppDispatch();
     const toggleFavorite = (id: string) => {
         if (favorites.includes(id)) {
             setFavorites(favorites.filter(favId => favId !== id));
         } else {
             if (favorites.length < 5) {
+                const obj: favoritePropsModel = {
+                    key: parseInt(id),
+                    cityName: "bla",
+                    countryName: "bla"
+                }
+                dispatch(onAddFavorite(obj))
                 setFavorites([...favorites, id]);
             } else {
                 alert("You can mark up to 5 favorites.");
@@ -22,26 +32,26 @@ const AutoCompleteValues = ({results, favorites, setFavorites} : autoCompleteVal
     };
     return (
         <div className={`${style.results} mt-2`}>
-        {results?.length > 0 && (
-            <div className="mb-2">
-                <ul className="list-group list-group-flush">
-                    {results.map((result)=> (
-                        <li key={result.id} className="list-group-item d-flex justify-content-between">
-                            {result.title}
-                            <div onClick={() => toggleFavorite(result.id)}>
-                                <StarIcon
-                                    width={20}
-                                    height={20}
-                                    color={favorites.includes(result.id) ? "#ffdd00" : "gray"}
-                                    styleClass=""
-                                />
-                            </div>
-                        </li>
-                    ))}
-                </ul>
-            </div>
-        )}
-    </div>
+            {results?.length > 0 && (
+                <div className="mb-2">
+                    <ul className="list-group list-group-flush">
+                        {results.map((result) => (
+                            <li key={result.id} className="list-group-item d-flex justify-content-between">
+                                {result.title}
+                                <div onClick={() => toggleFavorite(result.id)}>
+                                    <StarIcon
+                                        width={20}
+                                        height={20}
+                                        color={favorites.includes(result.id) ? "#ffdd00" : "gray"}
+                                        styleClass=""
+                                    />
+                                </div>
+                            </li>
+                        ))}
+                    </ul>
+                </div>
+            )}
+        </div>
     );
 };
 

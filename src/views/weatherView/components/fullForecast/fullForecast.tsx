@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import style from "./fullForecast.module.css"
+import SunnIcon3D from "../../../../assets/icons/3D/sunnIcon3D";
 
 interface IFullForecastModel{
     iconPhrase: string;
@@ -47,10 +48,10 @@ const FullForecast = () => {
             {
                 data?.map((item) => {
                     return(
-                        <div className="">
-                            <p> {item.date}</p>
-                            <p> {item.temperatureValue} {item.temperatureUnit}</p>
-                            <p> {item.iconPhrase}</p>
+                        <div className="d-flex flex-column align-items-center">
+                            <p className={style.dateStyle}> {item.date}</p>
+                            <SunnIcon3D width={80} height={80}/>
+                            <p className={style.temperatureStyle}> {item.temperatureValue}°{item.temperatureUnit}</p>
                         </div>
                     )
                 })

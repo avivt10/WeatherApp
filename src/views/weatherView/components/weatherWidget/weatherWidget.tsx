@@ -28,10 +28,11 @@ const WeatherWidget = () => {
         fetch()
     }, [])
     return (
-        <div className={` d-flex justify-content-center ${style.detailsWeather}`}>
+        <div className={`d-flex ${style.detailsWeather}`}>
             <div>
+                <h1 className={style.cityStyle}>Jerusalem</h1>
                 <p>{data?.weatherText}</p>
-                <p>{data?.temperatureUnit} {data?.temperatureValue}</p>
+                <p className={style.temperatureTodayStyle}>{data?.temperatureValue}°{data?.temperatureUnit} </p>
             </div>
             <div className={style.iconContainer}>
                 <SunnIcon3D styleClass={style.icon} />
