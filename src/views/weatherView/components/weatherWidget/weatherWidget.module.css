@@ -1,0 +1,15 @@
+.detailsWeather {
+  gap: 155px;
+  margin-top: 100px;
+}
+
+.iconContainer {
+  z-index: 0;
+}
+
+.icon {
+  width: 100px;
+  height: 100px;
+  transform: scale(2);
+  z-index: 1;
+}
