@@ -1,9 +1,8 @@
 import { useState } from "react";
-import style from "./search.module.css";
 import axios from "axios";
 import { ISearchModel } from "../../../models/search.model";
-import SearchIcon from "../../../../assets/icons/searchIcon";
-import StarIcon from "../../../../assets/icons/starIcon";
+import AutoCompleteValues from "./autoCompleteValues/autoCompleteValues";
+import style from "./search.module.css"
 
 const Search = () => {
     const [input, setInput] = useState("");
@@ -28,57 +27,22 @@ const Search = () => {
         fetch(value);
     }
 
-    const toggleFavorite = (id: string) => {
-        if (favorites.includes(id)) {
-            setFavorites(favorites.filter(favId => favId !== id));
-        } else {
-            if (favorites.length < 5) {
-                setFavorites([...favorites, id]);
-            } else {
-                alert("You can mark up to 5 favorites.");
-            }
-        }
-    };
+    
     return (
-        <div className="container mt-3">
+        <div className="container">
             <div className="row justify-content-center">
-                <div className="col-md-6">
-                    <form className={style.search}>
-                        <div className="input-group">
-                            <span className="input-group-text">
-                                <SearchIcon styleClass="ms-2" />
-                            </span>
+                    <form>
+                         {/* input search */}
                             <input
                                 type="text"
-                                placeholder="Search by city..."
+                                placeholder="Search for cities"
                                 value={input}
                                 onChange={(e) => handleInput(e.target.value)}
-                                className="form-control"
-                            />
-                        </div>
+                                className={style.inputBox}
+                            />    
                     </form>
-                    <div className={`${style.results} mt-2`} style={{ maxHeight: "300px", overflowY: "auto" }}>
-                        {results.length > 0 && (
-                            <div className="mb-2">
-                                <ul className="list-group list-group-flush">
-                                    {results.map((result) => (
-                                        <li key={result.id} className="list-group-item d-flex justify-content-between">
-                                            {result.title}
-                                            <div onClick={() => toggleFavorite(result.id)}>
-                                                <StarIcon
-                                                    width={20}
-                                                    height={20}
-                                                    color={favorites.includes(result.id) ? "#ffdd00" : "gray"}
-                                                    styleClass=""
-                                                />
-                                            </div>
-                                        </li>
-                                    ))}
-                                </ul>
-                            </div>
-                        )}
-                    </div>
-                </div>
+                   {/* display auto complete values */}
+                   <AutoCompleteValues results={results} favorites={favorites} setFavorites={setFavorites}/>
             </div>
         </div>
     );

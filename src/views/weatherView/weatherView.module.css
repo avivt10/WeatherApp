@@ -1,7 +1,13 @@
 .searchContainer{
-    width: 60%;
+    width: 100%;
     margin: auto;
     margin-top: 35px;
     display: flex;
     flex-direction: column;
+}
+
+.mainContainer{
+    display: flex;
+    flex-direction: column;
+    width: 60% !important;
 }

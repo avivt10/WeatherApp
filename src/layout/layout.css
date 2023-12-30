@@ -1,19 +1,19 @@
 .d-flex {
     display: flex;
+    flex-wrap: wrap; /* Allow items to wrap to the next line */
 }
 
 .sidebar {
-    width: 15%;
-    min-width: 200px;
+    width: 10%;
     height: 100vh;
     background-color: transparent;
     display: flex;
     flex-direction: column;
     align-items: center;
+    margin-left: 15px;
 }
 
 .inner-sidebar {
-    margin-top: 45px;
     display: flex;
     flex-direction: column;
     align-items: center;

@@ -33,7 +33,7 @@ const CloudyIcon3D = ({
         <clipPath id="d2213bca6a">
           <path
             d="M 2 10.050781 L 35 10.050781 L 35 27 L 2 27 Z M 2 10.050781 "
-            clip-rule="nonzero"
+            clipRule="nonzero"
           />
         </clipPath>
         <image
@@ -96,7 +96,7 @@ const CloudyIcon3D = ({
           preserveAspectRatio="xMidYMid meet"
         />
       </defs>
-      <g clip-path="url(#d2213bca6a)">
+      <g clipPath="url(#d2213bca6a)">
         <g mask="url(#f650e64c98)">
           <g transform="matrix(0.078924, 0, 0, 0.0791769, 1.850329, 10.051911)">
             <image

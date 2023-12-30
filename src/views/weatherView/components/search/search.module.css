@@ -1,4 +1,17 @@
-.results {
-   margin-top: 10px;
-   color: black;
+input.inputBox,
+textarea {
+    background-color: #202C3C;
+    color: #747A86;
+}
+
+::placeholder {
+    color: white;
+    opacity: 1;
+}
+
+.inputBox{
+    width: 100%;
+    border:none;
+    padding: 15px;
+    border-radius: 15px;
 }

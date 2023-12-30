@@ -33,7 +33,7 @@ const SunnIcon3D = ({
         <clipPath id="2815d79dcc">
           <path
             d="M 2.035156 2.035156 L 35 2.035156 L 35 35 L 2.035156 35 Z M 2.035156 2.035156 "
-            clip-rule="nonzero"
+            clipRule="nonzero"
           />
         </clipPath>
         <image
@@ -165,7 +165,7 @@ const SunnIcon3D = ({
           preserveAspectRatio="xMidYMid meet"
         />
       </defs>
-      <g clip-path="url(#2815d79dcc)">
+      <g clipPath="url(#2815d79dcc)">
         <g mask="url(#098590c5b8)">
           <g transform="matrix(0.0506939, 0, 0, 0.0506939, 2.035362, 2.035362)">
             <image

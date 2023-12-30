@@ -3,30 +3,23 @@ import WindIcon from '../../assets/icons/3D/windIcon3D';
 import SunnyCloudyIcon from '../../assets/icons/sunnyCloudyIcon';
 import FavoritesIcon from '../../assets/icons/favoritesIcon';
 
-const Sidebar = () => {
-  const wind = <WindIcon/>
+const Sidebar = () => { 
   const favorite = <FavoritesIcon/>
-  const weather = <SunnyCloudyIcon/>
-  const icons = [wind,favorite,weather];
-  const arr = ["wind","Favorites","Weather"]
+  const sunnyCloudyIcon = <SunnyCloudyIcon/>
+  const icons = [sunnyCloudyIcon,favorite];
+  const namesIcons = ["Weather","Favorites"]
   return (
+    <div className="d-flex justify-content-center flex-column">
+        <WindIcon width={50} height={50} styleClass="wind-icon"/>
       <ul className="nav flex-column">
-      {icons.map((item,id) => (
-            <li key={id} className="nav-item">
-              {
-                id === 0 ? 
-                <div className="d-flex m-auto justify-content-center mb-5">{item}
-                </div> 
-                :
-                <div>
-                  <a className="">{item}</a> 
-                  <span className="sidebar-title">{arr[id]}</span>
-                </div>
-              }
-             
+      {icons.map((item,index) => (
+            <li key={index} className="icons-style">
+                  <a>{item}</a> 
+                  <span>{namesIcons[index]}</span>
             </li>
           ))}
       </ul>
+    </div>
   );
 };
 
