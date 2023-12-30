@@ -33,7 +33,7 @@ const RainIcon3D = ({
         <clipPath id="3fb73caa86">
           <path
             d="M 3 4.375 L 34 4.375 L 34 32.5 L 3 32.5 Z M 3 4.375 "
-            clip-rule="nonzero"
+            clipRule="nonzero"
           />
         </clipPath>
         <image

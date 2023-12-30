@@ -1,32 +1,33 @@
-import './sideBar.css';
-import WindIcon from '../../assets/icons/3D/windIcon3D';
-import SunnyCloudyIcon from '../../assets/icons/sunnyCloudyIcon';
-import FavoritesIcon from '../../assets/icons/favoritesIcon';
+import "./sideBar.css";
+import WindIcon from "../../assets/icons/3D/windIcon3D";
+import SunnyCloudyIcon from "../../assets/icons/sunnyCloudyIcon";
+import FavoritesIcon from "../../assets/icons/favoritesIcon";
+import { sideBarConfig } from "./config/sideBar.config";
+import { NavLink } from "react-router-dom";
 
 const Sidebar = () => {
-  const wind = <WindIcon/>
-  const favorite = <FavoritesIcon/>
-  const weather = <SunnyCloudyIcon/>
-  const icons = [wind,favorite,weather];
-  const arr = ["wind","Favorites","Weather"]
+  const favorite = <FavoritesIcon />;
+  const sunnyCloudyIcon = <SunnyCloudyIcon />;
+  const icons = [sunnyCloudyIcon, favorite];
+
   return (
+    <nav className="side-bar-wrapper">
+      <div className="wind-icon">
+        <WindIcon width={50} height={50} />
+      </div>
       <ul className="nav flex-column">
-      {icons.map((item,id) => (
-            <li key={id} className="nav-item">
-              {
-                id === 0 ? 
-                <div className="d-flex m-auto justify-content-center mb-5">{item}
-                </div> 
-                :
-                <div>
-                  <a className="">{item}</a> 
-                  <span className="sidebar-title">{arr[id]}</span>
-                </div>
-              }
-             
-            </li>
-          ))}
+        {sideBarConfig.map((item, index) => (
+          <li key={index} className="icons-style">
+            <NavLink to={item.route}>
+              <span className="d-flex justify-content-center align-items-center">
+                {icons[item.icon]}
+              </span>
+              <span>{item.label}</span>
+            </NavLink>
+          </li>
+        ))}
       </ul>
+    </nav>
   );
 };
 

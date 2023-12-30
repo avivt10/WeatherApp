@@ -1,32 +1,53 @@
-.inner-sidebar {
-    background-color: #616161;
-    margin: auto;
-    width: 80%;
-    height: calc(100% - 1cm);
-    border-radius: 20px;
+.side-bar-wrapper {
+  background-color: #202c3c;
+  margin: 0 auto;
+  width: 75%;
+  height: 100%;
+  border-radius: 25px;
+  padding: 15px;
 }
 
-.sidebar li {
-    padding: 8px 16px;
-    color: #ecdfdf;
-    list-style-type: none; 
+.side-bar-wrapper .wind-icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 25px auto 25px auto;
+  width: 60%;
+  height: 60px;
+  background-color: #33415b;
+  border-radius: 18px;
 }
 
-.sidebar a {
-    color: #fff;
-    text-decoration: none;
-    padding: 10px;
-    display: block;
+.side-bar-wrapper .icons-style {
+  padding: 8px 16px;
+  color: #828a93;
+  list-style-type: none;
+  cursor: pointer;
+  transition: 0.5s;
 }
 
-.sidebar a:hover {
-    background-color: #ced5db;
-    border-radius: 10px;
+.side-bar-wrapper a {
+  color: #828a93;
+  text-decoration: none;
 }
 
-.sidebar li > div {
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    width: 100%;
+.side-bar-wrapper .header-inner-container {
+  background-color: #ecdfdf;
+}
+.icons-style a.active {
+  color: white;
+}
+
+.icons-style a.active path{
+  fill: white;
+}
+
+.icons-style:hover,
+.icons-style:hover a,
+.icons-style:hover span {
+  color: white;
+}
+
+.side-bar-wrapper .icons-style:hover path {
+  fill: white;
 }
