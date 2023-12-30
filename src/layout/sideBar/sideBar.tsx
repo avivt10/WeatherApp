@@ -1,12 +1,12 @@
 import './sideBar.css';
-import StarIcon from '../../assets/icons/star';
-import WeatherIcon from '../../assets/icons/weather';
-import WindIcon from '../../assets/icons/wind';
+import WindIcon from '../../assets/icons/3D/windIcon3D';
+import SunnyCloudyIcon from '../../assets/icons/sunnyCloudyIcon';
+import FavoritesIcon from '../../assets/icons/favoritesIcon';
 
 const Sidebar = () => {
   const wind = <WindIcon/>
-  const favorite = <StarIcon/>
-  const weather = <WeatherIcon/>
+  const favorite = <FavoritesIcon/>
+  const weather = <SunnyCloudyIcon/>
   const icons = [wind,favorite,weather];
   const arr = ["wind","Favorites","Weather"]
   return (

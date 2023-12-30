@@ -2,8 +2,8 @@ import { useState } from "react";
 import style from "./search.module.css";
 import axios from "axios";
 import { ISearchModel } from "../../../models/search.model";
-import SearchIcon from "../../../../assets/icons/search";
-import StarIcon from "./../../../../assets/icons/star";
+import SearchIcon from "../../../../assets/icons/searchIcon";
+import StarIcon from "../../../../assets/icons/starIcon";
 
 const Search = () => {
     const [input, setInput] = useState("");
