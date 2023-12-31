@@ -1,7 +1,7 @@
 export interface favoritePropsModel {
-  key: number;
+  key: string;
   cityName: string;
-  countryName: string
+  countryName: string;
 }
 
 export interface favoriteListModel {

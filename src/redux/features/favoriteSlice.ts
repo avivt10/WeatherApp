@@ -1,5 +1,5 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit"
-import { favoritesListModel, favoritePropsModel, favoritesIdModel } from "../models/favorite.model";
+import { favoritesListModel, favoritePropsModel } from "../models/favorite.model";
 
 const initialState: favoritesListModel = {
   favorites: []
@@ -14,9 +14,10 @@ const favoriteSlice = createSlice({
       onAddFavorite: (state, action: PayloadAction<favoritePropsModel>) =>{
         state.favorites.unshift(action.payload);
       },
-      onDeleteFavorite: (state,action: PayloadAction<{key: number}>) => {
-        state.favorites.filter((favorite) => favorite.key != action.payload.key)
+      onDeleteFavorite: (state, action: PayloadAction<{ Key: string; }>) => {
+        state.favorites = state.favorites.filter((favorite) => favorite.key !== action.payload.Key);
       },
+
     }
 })
 

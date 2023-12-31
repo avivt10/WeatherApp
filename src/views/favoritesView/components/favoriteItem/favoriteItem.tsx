@@ -1,5 +1,7 @@
 import SunnIcon3D from "../../../../assets/icons/3D/sunnIcon3D";
+import StarIcon from "../../../../assets/icons/starIcon";
 import { favoritePropsModel } from "../../../../redux/models/favorite.model";
+import style from "./favoriteItem.module.css"
 
 interface FavoritesItemProps{
     favorite:favoritePropsModel;
@@ -9,11 +11,12 @@ interface FavoritesItemProps{
 const FavoriteItem = ({favorite,setFavoritesArray} : FavoritesItemProps) => {
     return (
         <div>
-            <p>{favorite.cityName}</p>
-            <p className="">{favorite.countryName}</p>
-            <SunnIcon3D width={80} height={80}/>
-        </div>
+         <StarIcon styleClass={style.starIconStyle}/>
+        <p className={style.cityNameStyle}>{favorite.Name}</p>
+        <SunnIcon3D width={100} height={100}/>
+        <p className={style.temperatureStyle}>{favorite.temperatureValue}°{favorite.temperatureUnit}</p>
+    </div>
     );
-};
+        };
 
 export default FavoriteItem;

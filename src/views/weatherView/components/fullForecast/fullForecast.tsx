@@ -2,6 +2,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import style from "./fullForecast.module.css"
 import SunnIcon3D from "../../../../assets/icons/3D/sunnIcon3D";
+import { ICurrentCityModel } from "../../weatherView";
 
 interface IFullForecastModel{
     iconPhrase: string;
@@ -10,12 +11,11 @@ interface IFullForecastModel{
     date: string;
 }
 
-const FullForecast = () => {
+const FullForecast = ({currentCity} : ICurrentCityModel) => {
     const [data,setData] = useState<IFullForecastModel[]>()
     const fetch = async () => {
         try{
-            const response = await axios.get("http://localhost:3001/forecasts/v1/daily/5day/&apikey=VUJwGyRzZ2R7uI16yeYeejAQuVSqplAG")
-            console.log(response.data)
+            const response = await axios.get(`http://localhost:3000/forecasts/v1/daily/5day/&apikey=${import.meta.env.VITE_APIKEY}`)
             const object = [];
             for (let i = 0; i <= 4; i++) {
                 const obj = {

@@ -21,7 +21,7 @@ const SunnIcon3D = ({
         <filter x="0%" y="0%" width="100%" height="100%" id="bc0cb2a78d">
           <feColorMatrix
             values="0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 1 0"
-            colorInterpolation-filters="sRGB"
+            colorInterpolationFilters="sRGB"
           />
         </filter>
         <filter x="0%" y="0%" width="100%" height="100%" id="ec7a3adedf">

@@ -1,39 +1,42 @@
-import { useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import axios from "axios";
-import { ISearchModel } from "../../../models/search.model";
+import { ISearchModel } from "./models/search.model";
 import AutoCompleteValues from "./autoCompleteValues/autoCompleteValues";
 import style from "./search.module.css";
+import debounce from "lodash.debounce";
 
 const Search = () => {
   const [input, setInput] = useState("");
   const [results, setResults] = useState<ISearchModel[]>([]);
-  const [favorites, setFavorites] = useState<string[]>([]);
 
-  const fetch = async (value: string) => {
+  const fetch = async (value: string): Promise<void> => {
     try {
-      const res = await axios(`https://jsonplaceholder.typicode.com/todos/`);
-      const result = res.data.filter((todo: ISearchModel) => {
-        return (
-          value &&
-          todo &&
-          todo.title &&
-          todo.title.toLocaleLowerCase().startsWith(value.toLocaleLowerCase())
+      if (value) {
+        const { data } = await axios.get(
+          `http://localhost:3000/locations/v1/cities/autocomplete?q=${value}&apikey=${import.meta.env.VITE_APIKEY}`
         );
-      });
-      setResults(result);
+        console.log(data)
+        setResults(data);
+      } else {
+        setResults([]);
+        setInput("");
+      }
     } catch (err) {
       console.log(err);
     }
   };
 
-  const handleInput = (value: string) => {
+  // Debounce the API call
+  const debouncedFetch = useCallback(debounce(fetch, 2000), []);
+
+  const handleInput = (value: string): void => {
     setInput(value);
-    fetch(value);
+    debouncedFetch(value);
   };
 
   return (
-    <div className="row justify-content-center">
-      <form>
+    <div className={style.searchWrapper}>
+      <form className={style.inputForm}>
         {/* input search */}
         <input
           type="text"
@@ -45,11 +48,14 @@ const Search = () => {
       </form>
 
       {/* display auto complete values */}
-      <AutoCompleteValues
-        results={results}
-        favorites={favorites}
-        setFavorites={setFavorites}
-      />
+      {results.length && (
+        <AutoCompleteValues
+          key={results.key}
+          results={results}
+          setInput={setInput}
+          setResults={setResults}
+        />
+      )}
     </div>
   );
 };

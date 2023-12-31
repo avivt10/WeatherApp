@@ -1,0 +1,22 @@
+.countryNameStyle,.cityNameStyle,.temperatureStyle{
+    display: flex;
+    justify-content: center;
+}
+
+.cityNameStyle{
+    font-size: 18px;
+    font-weight: 500;
+}
+.temperatureStyle{
+    font-size: 50px;
+    font-weight: 700;
+}
+/* .starIconStyleContainer{
+    position: absolute;
+    margin-left: 145px;
+    margin-top: -60px;
+} */
+
+.starIconStyle{
+    
+}
