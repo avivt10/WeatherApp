@@ -8,7 +8,7 @@ const getWeatherWidgetImages: WeatherImagesModel = {
     5: "5-Hazy Sunshine.png",
     6: "6-Mostly Cloudy.png",
     7: "7-Cloudy.png",
-    8: "8-Dreary.png",
+    8: "8-Dreary (Overcast).png",
     11: "11-Fog.png",
     12: "12-Showers.png",
     13: "13-Mostly Cloudy_Showers.png",
