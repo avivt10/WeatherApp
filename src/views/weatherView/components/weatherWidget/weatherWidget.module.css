@@ -5,15 +5,16 @@
   margin-top: 100px;
 }
 
-.iconContainer {
-  z-index: 0;
+.detailsWeatherLight{
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  margin-top: 100px;
+  color: #0B131E !important;
 }
 
-.icon {
-  width: 100px;
-  height: 100px;
-  transform: scale(2);
-  z-index: 1;
+.iconContainer {
+  z-index: 0;
 }
 
 .cityStyle{
@@ -24,4 +25,25 @@
 .temperatureTodayStyle{
   font-size: 50px;
   font-weight: 700;
+}
+
+.iconImage {
+  height: 100px;
+  transform: scale(2);
+  z-index: 1;
+}
+
+@media screen and (max-width: 550px) {
+  .detailsWeather{
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+  }
+  .icon{
+    width: 50px;
+    height: 40px;
+  }
+  .iconImage{
+    margin-top: 40px;
+  }
 }

@@ -1,7 +1,6 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import { ISearchModel } from "../../views/weatherView/components/search/models/search.model";
 
-
 interface cityModel {
   currentCity: ISearchModel;
 }
@@ -9,13 +8,13 @@ interface cityModel {
 const initialState: cityModel = {
   currentCity: {
     key: "",
-    city:'',
-    country: ''
-  }
+    city: "",
+    country: "",
+  },
 };
 
 const citySlice = createSlice({
-  name: 'city',
+  name: "city",
   initialState: initialState,
 
   // actions to change the state
@@ -23,10 +22,8 @@ const citySlice = createSlice({
     onChangeCurrentCity: (state, action: PayloadAction<cityModel>) => {
       state.currentCity = action.payload.currentCity;
     },
-  }
+  },
 });
 
-export const {
-  onChangeCurrentCity
-} = citySlice.actions;
+export const { onChangeCurrentCity } = citySlice.actions;
 export default citySlice.reducer;

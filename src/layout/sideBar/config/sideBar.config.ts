@@ -1,8 +1,4 @@
-interface sideBarModel {
-  icon: number,
-  label: string,
-  route: string;
-}
+import { sideBarModel } from "./models/sideBarModel";
 
 export const sideBarConfig: sideBarModel[] = [
   {

@@ -1,33 +1,40 @@
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useState } from "react";
 import axios from "axios";
 import { ISearchModel } from "./models/search.model";
 import AutoCompleteValues from "./autoCompleteValues/autoCompleteValues";
 import style from "./search.module.css";
 import debounce from "lodash.debounce";
+import { mappedSearchModel } from "./models/mappedSearchModel";
+import { toast } from "react-toastify";
 
 const Search = () => {
   const [input, setInput] = useState("");
   const [results, setResults] = useState<ISearchModel[]>([]);
-
+  const DEBOUNCE_TIME = 300;
   const fetch = async (value: string): Promise<void> => {
     try {
       if (value) {
         const { data } = await axios.get(
-          `http://localhost:3000/locations/v1/cities/autocomplete?q=${value}&apikey=${import.meta.env.VITE_APIKEY}`
+          `http://dataservice.accuweather.com/locations/v1/cities/autocomplete?apikey=${import.meta.env.VITE_APIKEY}&q=${value}`
         );
-        console.log(data)
-        setResults(data);
+        const mappedSearch: ISearchModel[] = data.map((el: mappedSearchModel) => ({
+          key: el.Key,
+          city: el.LocalizedName,
+          country: el.Country.LocalizedName,
+        }));
+
+        setResults(mappedSearch);
       } else {
         setResults([]);
         setInput("");
       }
     } catch (err) {
-      console.log(err);
+      toast(String(err))
     }
   };
 
   // Debounce the API call
-  const debouncedFetch = useCallback(debounce(fetch, 2000), []);
+  const debouncedFetch = useCallback(debounce(fetch, DEBOUNCE_TIME), []);
 
   const handleInput = (value: string): void => {
     setInput(value);
@@ -36,7 +43,7 @@ const Search = () => {
 
   return (
     <div className={style.searchWrapper}>
-      <form className={style.inputForm}>
+      <form className="p-2">
         {/* input search */}
         <input
           type="text"
@@ -48,14 +55,14 @@ const Search = () => {
       </form>
 
       {/* display auto complete values */}
-      {results.length && (
+      {
+        results.length > 0 &&
         <AutoCompleteValues
-          key={results.key}
           results={results}
           setInput={setInput}
           setResults={setResults}
         />
-      )}
+      }
     </div>
   );
 };

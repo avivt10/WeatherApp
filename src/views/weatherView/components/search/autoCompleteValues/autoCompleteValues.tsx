@@ -8,12 +8,7 @@ import {
 import { favoritePropsModel } from "../../../../../redux/models/favorite.model";
 import { ISearchModel } from "../models/search.model";
 import { onChangeCurrentCity } from "../../../../../redux/features/citySlice";
-
-interface autoCompleteValuesModel {
-  results: ISearchModel[];
-  setInput: React.Dispatch<React.SetStateAction<string>>;
-  setResults: React.Dispatch<React.SetStateAction<ISearchModel[]>>;
-}
+import { autoCompleteValuesModel } from "./models/autoCompleteValuesModel";
 
 const AutoCompleteValues = ({
   results,
@@ -22,7 +17,7 @@ const AutoCompleteValues = ({
 }: autoCompleteValuesModel) => {
   const dispatch = useAppDispatch();
   const { favorites } = useAppSelector((state) => state.favoriteSlice);
-  console.log(results)
+
   const navigateToCity = (city: ISearchModel) => {
     dispatch(onChangeCurrentCity({ currentCity: city }));
     setInput("");
@@ -43,16 +38,12 @@ const AutoCompleteValues = ({
   };
 
   const addNewCity = (city: ISearchModel) => {
-    if (favorites.length < 5) {
-      const newFavorite: favoritePropsModel = {
-        key: city.key,
-        cityName: city.city || "",
-        countryName: city.country || "",
-      };
-      dispatch(onAddFavorite(newFavorite));
-    } else {
-      alert("You can mark up to 5 favorites.");
-    }
+    const newFavorite: favoritePropsModel = {
+      key: city.key,
+      cityName: city.city || "",
+      countryName: city.country || "",
+    };
+    dispatch(onAddFavorite(newFavorite));
   };
 
   return (
@@ -66,7 +57,9 @@ const AutoCompleteValues = ({
                 className={`${style.listItem} list-group-item d-flex justify-content-between`}
                 onClick={() => navigateToCity(result)}
               >
-                {result.city}, {result.country}
+                <span className="text-white">
+                  {result.city}, {result.country}
+                </span>
                 <div onClick={(e) => toggleFavorite(e, result)}>
                   <StarIcon
                     width={20}
@@ -74,7 +67,7 @@ const AutoCompleteValues = ({
                     color={
                       favorites.some((favorite) => favorite.key === result.key)
                         ? "#ffdd00"
-                        : "gray"
+                        : "#828a93"
                     }
                   />
                 </div>

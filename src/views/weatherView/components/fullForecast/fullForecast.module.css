@@ -1,18 +1,58 @@
-.fullForceCastContainer{
+.fullForceCastContainer {
+  display: flex;
+  justify-content: space-around;
+  background-color: #202c3c !important;
+  margin-top: 150px;
+  padding: 15px;
+  border-radius: 15px;
+  min-height: 214px;
+}
+
+.temperatureStyle {
+  font-weight: 700;
+  font-size: 30px;
+}
+
+.dateStyle {
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.imageIcon{
+  width: 100%;
+}
+
+@media screen and (max-width: 790px) {
+    .fullForceCastContainer{
+      display: flex;
+      flex-direction: column;
+      margin-top: 150px;
+      margin-bottom: 10px
+    }
+
+    .FullForeCastStyle{
+      text-align-last: center;
+      border-bottom-style: double;
+      border-color: #0B131E;
+      padding: 15px 20px;
+    }
+}
+
+
+@media screen and (max-width: 550px) {
+  .fullForceCastContainer{
     display: flex;
-    justify-content: space-around;
-    background-color: #202c3c !important;
-    margin-top: 150px;
-    padding:15px;
-    border-radius: 15px;
-}
+    flex-direction: column;
+    margin-top: 45px !important;
+    align-items: center;
+    margin-bottom: 10px
+  }
+  .FullForeCastStyle{
+    text-align-last: center;
+    border-bottom-style: double;
+    border-color: #0B131E;
+    width: 80%;
+    padding: 15px 20px;
+  }
 
-.temperatureStyle{
-    font-weight: 700;
-    font-size: 30px;
-}
-
-.dateStyle{
-    font-size: 18px;
-    font-weight: 500;
 }
