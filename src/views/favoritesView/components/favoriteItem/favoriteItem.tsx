@@ -7,13 +7,17 @@ import { useDispatch } from "react-redux";
 import { FavoritesItemProps } from "./models/favoritesItemProps";
 import getWeatherIconByNumber from "../../../weatherView/components/fullForecast/functions/getWeatherForecastIconByNumber";
 import { toast } from "react-toastify";
+import  { onChangeCurrentCity } from "../../../../redux/features/citySlice";
+import { useNavigate } from "react-router-dom";
+import { useAppSelector } from "../../../../redux/hooks";
 
 const FavoriteItem = ({ favorite }: FavoritesItemProps) => {
-  const dispatch = useDispatch();
   const [temperatureValue, setTemperatureValue] = useState(0);
   const [temperatureUnit, setTemperatureUnit] = useState("");
   const [weatherIcon, setWeatherIcon] = useState<number>(0);
-
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const currentCity = useAppSelector(state => state.citySlice.currentCity)
   useEffect(() => {
     const getCurrentConditions = async () => {
       try{
@@ -25,13 +29,24 @@ const FavoriteItem = ({ favorite }: FavoritesItemProps) => {
         toast(err as string)
       }
     }
-
     getCurrentConditions();
   }, []);
 
   const removeCityFromFavorites = (key: string) => {
     dispatch(onDeleteFavorite({ Key: key }));
   };
+
+  const chooseCurrentCity = () => {
+    dispatch(onChangeCurrentCity({
+      currentCity:{
+        city: favorite.cityName,
+        country: favorite.countryName,
+        key: favorite.key 
+      }
+    }))
+    navigate("/")
+  };
+
 
   return (
     <div className={style.favoriteWrapper}>
@@ -43,7 +58,7 @@ const FavoriteItem = ({ favorite }: FavoritesItemProps) => {
           >
             <StarIcon color="#ffdd00" />
           </div>
-          <div className={style.favoriteCard}>
+          <div className={style.favoriteCard} onClick={()=> chooseCurrentCity()}>
             <h3 className="mt-4">{favorite.cityName}</h3>
             <img src={`/src/assets/weather-icons/${getWeatherIconByNumber(weatherIcon)}`} className={style.favoriteIcon} alt={`${weatherIcon}`} />
             <h4 className={style.temperatureStyle}>

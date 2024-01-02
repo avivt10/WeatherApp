@@ -13,34 +13,104 @@ const WeatherView = () => {
   const { currentCity } = useAppSelector((state) => state.citySlice);
   const [mappedCurrentCity, setMappedCurrentCity] =
     useState<ICurrentCityPropsModel>();
+    const [latitude, setLatitude] = useState(0);
+    const [longitude, setLongitude] = useState(0);
+
   // on init get Tel Aviv
   useEffect(() => {
-    if (currentCity) {
-      const getCityDetails = async () => {
-        try{
-          const { data } = await axios.get(
-            `http://dataservice.accuweather.com/locations/v1/1662?apikey=${import.meta.env.VITE_APIKEY}`
+    if(currentCity.key === ""){
+      const getLocation = () => {
+        if (navigator.geolocation) {
+          navigator.geolocation.getCurrentPosition((position) => {
+              setLatitude(position.coords.latitude);
+              setLongitude(position.coords.longitude);
+              getCityDetailsByLocation(position.coords.latitude, position.coords.longitude);
+            },
+            () => {
+              getCityByDefault("1662");
+            }
           );
-          dispatch(
-            onChangeCurrentCity({
-              currentCity: {
-                city: data.ParentCity.LocalizedName,
-                country: data.Country.LocalizedName,
-                key: data.ParentCity.Key,
-              },
-            })
-          );
-        }catch(err){   
-          toast(String(err))
-        }
+        } 
+      };
+      getLocation();
+    }else{
+      if(navigator.geolocation){
+        navigator.geolocation.getCurrentPosition(
+          () => {
+            getCityDetailsByLocationKey(currentCity.key);
+          }
+        )
+      }
     }
-    getCityDetails();
-  }}
-  , []);
+  }, []);
+
+
+const getCityByDefault = async(key: string) => {
+  try{
+    const {data} = await axios.get(`http://dataservice.accuweather.com/locations/v1/${key}?apikey=${import.meta.env.VITE_APIKEY}`)
+    dispatch(
+      onChangeCurrentCity({
+        currentCity: {
+          city: data.ParentCity.LocalizedName,
+          country: data.Country.LocalizedName,
+          key: data.Key,
+        },
+      })
+    );
+
+  }catch(err){
+    toast(String(err))
+  }
+}
+
+
+  const getCityDetailsByLocationKey = async(key: string) => {
+    try{
+      const {data} = await axios.get(`http://dataservice.accuweather.com/locations/v1/${key}?apikey=${import.meta.env.VITE_APIKEY}`)
+      dispatch(
+        onChangeCurrentCity({
+          currentCity: {
+            city: data.LocalizedName,
+            country: data.Country.LocalizedName,
+            key: data.Key,
+          },
+        })
+      );
+
+    }catch(err){
+      toast(String(err))
+    }
+  }
+
+
+
+
+  const getCityDetailsByLocation = async (latitude:number, longitude:number) => {
+    try {
+      const { data } = await axios.get(
+        `http://dataservice.accuweather.com/locations/v1/cities/geoposition/search?apikey=${import.meta.env.VITE_APIKEY}&q=${latitude},${longitude}`
+      );
+      dispatch(
+        onChangeCurrentCity({
+          currentCity: {
+            city: data.LocalizedName,
+            country: data.Country.LocalizedName,
+            key: data.Key,
+          },
+        })
+      );
+    } catch (err) {
+      toast(String(err))
+    }
+  }
+
 
   useEffect(() => {
-    if (currentCity.key) getConditions();
+    if (currentCity.key) {
+      getConditions();
+    }
   }, [currentCity]);
+
 
   const getConditions = async () => {
     try{

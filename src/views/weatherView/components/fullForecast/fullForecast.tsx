@@ -39,13 +39,14 @@ const FullForecast = () => {
   useEffect(() => {
     fetch();
   }, [currentCity]);
-  
+  //src/assets/weather-icons/13-Mostly Cloudy_Showers.png
+ 
   return (
     <>
       <div className={style.fullForceCastContainer}>
-        {data?.map((item) => {
+        {data?.map((item,i) => {
           return (
-            <div className={`d-flex flex-column align-items-center ${style.FullForeCastStyle}`}>
+            <div key={i} className={`d-flex flex-column align-items-center ${style.FullForeCastStyle}`}>
               <p className={style.dateStyle}> {item.date}</p>
               <img src={`/src/assets/weather-icons/${getWeatherIconByNumber(item.numberIcon)}`} className={style.imageIcon} alt={`${item.numberIcon}`} />
               <p className={style.temperatureStyle}>
