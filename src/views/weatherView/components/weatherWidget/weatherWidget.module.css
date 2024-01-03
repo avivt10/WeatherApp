@@ -7,7 +7,6 @@
 
 .detailsWeatherLight {
   display: flex;
-  text-align: center;
   justify-content: space-around;
   align-items: center;
   margin-top: 100px;
@@ -46,5 +45,8 @@
   }
   .iconImage {
     margin-top: 40px;
+  }
+  .detailsWeatherLight{
+      text-align: center;
   }
 }
