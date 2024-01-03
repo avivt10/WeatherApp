@@ -1,39 +1,49 @@
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import axios from "axios";
-import { ISearchModel } from "../../../models/search.model";
+import { ISearchModel } from "./models/search.model";
 import AutoCompleteValues from "./autoCompleteValues/autoCompleteValues";
 import style from "./search.module.css";
+import debounce from "lodash.debounce";
+import { mappedSearchModel } from "./models/mappedSearchModel";
+import { toast } from "react-toastify";
 
 const Search = () => {
   const [input, setInput] = useState("");
   const [results, setResults] = useState<ISearchModel[]>([]);
-  const [favorites, setFavorites] = useState<string[]>([]);
-
-  const fetch = async (value: string) => {
+  const DEBOUNCE_TIME = 300;
+  const fetch = async (value: string): Promise<void> => {
     try {
-      const res = await axios(`https://jsonplaceholder.typicode.com/todos/`);
-      const result = res.data.filter((todo: ISearchModel) => {
-        return (
-          value &&
-          todo &&
-          todo.title &&
-          todo.title.toLocaleLowerCase().startsWith(value.toLocaleLowerCase())
+      if (value) {
+        const { data } = await axios.get(
+          `http://dataservice.accuweather.com/locations/v1/cities/autocomplete?apikey=${import.meta.env.VITE_APIKEY}&q=${value}`
         );
-      });
-      setResults(result);
+        const mappedSearch: ISearchModel[] = data.map((el: mappedSearchModel) => ({
+          key: el.Key,
+          city: el.LocalizedName,
+          country: el.Country.LocalizedName,
+        }));
+
+        setResults(mappedSearch);
+      } else {
+        setResults([]);
+        setInput("");
+      }
     } catch (err) {
-      console.log(err);
+      toast(String(err))
     }
   };
 
-  const handleInput = (value: string) => {
+  // Debounce the API call
+  const debouncedFetch = useCallback(debounce(fetch, DEBOUNCE_TIME), []);
+
+  const handleInput = (value: string): void => {
     setInput(value);
-    fetch(value);
+    debouncedFetch(value);
   };
 
   return (
-    <div className="row justify-content-center">
-      <form>
+    <div className={style.searchWrapper}>
+      <form className="p-2">
         {/* input search */}
         <input
           type="text"
@@ -45,11 +55,14 @@ const Search = () => {
       </form>
 
       {/* display auto complete values */}
-      <AutoCompleteValues
-        results={results}
-        favorites={favorites}
-        setFavorites={setFavorites}
-      />
+      {
+        results.length > 0 &&
+        <AutoCompleteValues
+          results={results}
+          setInput={setInput}
+          setResults={setResults}
+        />
+      }
     </div>
   );
 };

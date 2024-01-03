@@ -1,10 +1,6 @@
-interface sideBarModel {
-  icon: number,
-  label: string,
-  route: string;
-}
+import { sideBarConfigModel } from "./models/sideBarConfigModel";
 
-export const sideBarConfig: sideBarModel[] = [
+export const sideBarConfig: sideBarConfigModel[] = [
   {
     icon: 0,
     label: 'Weather',

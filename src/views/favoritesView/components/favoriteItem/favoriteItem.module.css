@@ -1,0 +1,37 @@
+.favoriteWrapper {
+  min-height: 200px;
+  position: relative;
+  background: #202c3c;
+  border-radius: 12px;
+  padding: 24px 12px;
+  color: #828a93;
+  cursor: pointer;
+  transition: 0.5s;
+}
+
+.favoriteWrapper:hover {
+  color: white;
+  box-shadow: 0px 10px 13px -7px #000000, 5px 5px 15px 5px rgba(32, 44, 60, 0);
+}
+
+.favoriteCard {
+  text-align: center;
+}
+
+.starIconStyle {
+  position: absolute;
+  right: 0;
+  top: 0;
+  display: block;
+  padding: 8px 8px 0 0;
+}
+
+.favoriteIcon{
+  width: 100%;
+  padding: 15px;
+}
+@media screen and (max-width: 550px) {
+  .favoriteWrapper {
+    margin-top: 15px;
+  }
+}

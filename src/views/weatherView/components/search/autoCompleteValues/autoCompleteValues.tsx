@@ -1,48 +1,83 @@
-import { ISearchModel } from "../../../../models/search.model";
-import style from "./autoCompleteValues.module.css"
+import style from "./autoCompleteValues.module.css";
 import StarIcon from "../../../../../assets/icons/starIcon";
+import { useAppDispatch, useAppSelector } from "../../../../../redux/hooks";
+import {
+  onAddFavorite,
+  onDeleteFavorite,
+} from "../../../../../redux/features/favoriteSlice";
+import { favoritePropsModel } from "../../../../../redux/models/favorite.model";
+import { ISearchModel } from "../models/search.model";
+import { onChangeCurrentCity } from "../../../../../redux/features/citySlice";
+import { autoCompleteValuesModel } from "./models/autoCompleteValuesModel";
 
-interface autoCompleteValuesModel {
-    results: ISearchModel[],
-    favorites: string[],
-    setFavorites: React.Dispatch<React.SetStateAction<string[]>>,
-}
+const AutoCompleteValues = ({
+  results,
+  setInput,
+  setResults,
+}: autoCompleteValuesModel) => {
+  const dispatch = useAppDispatch();
+  const { favorites } = useAppSelector((state) => state.favoriteSlice);
 
-const AutoCompleteValues = ({results, favorites, setFavorites} : autoCompleteValuesModel) => {
-    const toggleFavorite = (id: string) => {
-        if (favorites.includes(id)) {
-            setFavorites(favorites.filter(favId => favId !== id));
-        } else {
-            if (favorites.length < 5) {
-                setFavorites([...favorites, id]);
-            } else {
-                alert("You can mark up to 5 favorites.");
-            }
-        }
+  const navigateToCity = (city: ISearchModel) => {
+    dispatch(onChangeCurrentCity({ currentCity: city }));
+    setInput("");
+    setResults([]);
+  };
+
+  const toggleFavorite = (
+    event: React.MouseEvent<HTMLDivElement, MouseEvent>,
+    city: ISearchModel
+  ) => {
+    event.stopPropagation();
+    if (favorites.some((favorite) => favorite.key === city.key)) {
+      // remove from state
+      dispatch(onDeleteFavorite({ Key: city.key }));
+    } else {
+      addNewCity(city);
+    }
+  };
+
+  const addNewCity = (city: ISearchModel) => {
+    const newFavorite: favoritePropsModel = {
+      key: city.key,
+      cityName: city.city || "",
+      countryName: city.country || "",
     };
-    return (
-        <div className={`${style.results} mt-2`}>
-        {results?.length > 0 && (
-            <div className="mb-2">
-                <ul className="list-group list-group-flush">
-                    {results.map((result)=> (
-                        <li key={result.id} className="list-group-item d-flex justify-content-between">
-                            {result.title}
-                            <div onClick={() => toggleFavorite(result.id)}>
-                                <StarIcon
-                                    width={20}
-                                    height={20}
-                                    color={favorites.includes(result.id) ? "#ffdd00" : "gray"}
-                                    styleClass=""
-                                />
-                            </div>
-                        </li>
-                    ))}
-                </ul>
-            </div>
-        )}
+    dispatch(onAddFavorite(newFavorite));
+  };
+
+  return (
+    <div className={`${style.results} mt-2`}>
+      {results?.length > 0 && (
+        <div className="mb-2">
+          <ul className="list-group list-group-flush">
+            {results.map((result) => (
+              <li
+                key={result.key}
+                className={`${style.listItem} list-group-item d-flex justify-content-between`}
+                onClick={() => navigateToCity(result)}
+              >
+                <span className="text-white">
+                  {result.city}, {result.country}
+                </span>
+                <div onClick={(e) => toggleFavorite(e, result)}>
+                  <StarIcon
+                    width={20}
+                    height={20}
+                    color={
+                      favorites.some((favorite) => favorite.key === result.key)
+                        ? "#ffdd00"
+                        : "#828a93"
+                    }
+                  />
+                </div>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
     </div>
-    );
+  );
 };
 
 export default AutoCompleteValues;

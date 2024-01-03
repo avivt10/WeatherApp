@@ -2,5 +2,22 @@
     margin-top: 10px;
     color: black;
     max-height: 300px;
-    overflow-y:auto;
- }
+    overflow-y: auto;
+    position: absolute;
+    width: 100%;
+    top: 10;
+    left: 0;
+    z-index: 10;
+    box-shadow: 0px 10px 13px -7px #000000, 5px 5px 15px 5px rgba(32, 44, 60, 0);
+  }
+  
+  .listItem {
+    background: #0b131e;
+    color: #828a93;
+    cursor: pointer;
+  }
+  
+  .listItem:hover {
+    background: #202c3c;
+  }
+  

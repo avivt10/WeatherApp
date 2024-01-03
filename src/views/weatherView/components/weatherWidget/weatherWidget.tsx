@@ -1,43 +1,60 @@
-import axios from "axios";
-import { useEffect, useState } from "react";
-import SunnIcon3D from "../../../../assets/icons/3D/sunnIcon3D";
-import style from "./weatherWidget.module.css"
+import StarIcon from "../../../../assets/icons/starIcon";
+import { onAddFavorite, onDeleteFavorite } from "../../../../redux/features/favoriteSlice";
+import { useAppDispatch, useAppSelector } from "../../../../redux/hooks";
+import { favoritePropsModel } from "../../../../redux/models/favorite.model";
+import { ISearchModel } from "../search/models/search.model";
+import style from "./weatherWidget.module.css";
+import { ICurrentCityModel } from './../../models/currentCityModel';
+import getWeatherIconByNumber from "../../../../shared/functions/getWeatherForecastIconByNumber";
 
-interface IWeatherWidgetModel {
-    weatherText: string;
-    temperatureValue: number;
-    temperatureUnit: string;
-}
-const WeatherWidget = () => {
-    const [data, setData] = useState<IWeatherWidgetModel>()
-    const fetch = async () => {
-        try {
-            const response = await axios.get("http://localhost:3001/currentconditions/v1/&apikey=VUJwGyRzZ2R7uI16yeYeejAQuVSqplAG")
-            const obj = {
-                weatherText: response.data[0].WeatherText,
-                temperatureValue: response.data[0].Temperature.Metric.Value,
-                temperatureUnit: response.data[0].Temperature.Metric.Unit
-            }
-            setData(obj)
-        } catch (err) {
-            console.log(err)
-        }
+const WeatherWidget = ({ currentCity }: ICurrentCityModel) => {
+  const onChangeMode = useAppSelector((state) => state.switchModeSlice.onChangeMode);
+  const { favorites } = useAppSelector((state) => state.favoriteSlice);
+  const dispatch = useAppDispatch();
+
+  const toggleFavorite = (
+    event: React.MouseEvent<HTMLDivElement, MouseEvent>,
+    city: ISearchModel
+  ) => {
+    
+    event.stopPropagation();
+    if (favorites.some((favorite) => favorite.key === city.key)) {
+      // remove from state
+      dispatch(onDeleteFavorite({ Key: city.key }));
+    } else {
+      addNewCity(city);
     }
+  };
 
-    useEffect(() => {
-        fetch()
-    }, [])
-    return (
-        <div className={` d-flex justify-content-center ${style.detailsWeather}`}>
-            <div>
-                <p>{data?.weatherText}</p>
-                <p>{data?.temperatureUnit} {data?.temperatureValue}</p>
-            </div>
-            <div className={style.iconContainer}>
-                <SunnIcon3D styleClass={style.icon} />
-            </div>
-        </div>
-    );
+  const addNewCity = (city: ISearchModel) => {
+    const newFavorite: favoritePropsModel = {
+      key: city.key,
+      cityName: city.city || "",
+      countryName: city.country || "",
+    };
+    dispatch(onAddFavorite(newFavorite));
+  };
+  
+  return (
+    <div className={`d-flex ${ onChangeMode ? style.detailsWeatherLight : style.detailsWeather}`}>
+      <div>
+        <div onClick={(e) => toggleFavorite(e, currentCity)}>
+        <StarIcon width={40} height={40} color={favorites.some((favorite) => favorite.key === currentCity.key)
+          ? "#ffdd00"
+          : "#828a93"
+        }/>
+      </div>
+        <h1 className={style.cityStyle}>{currentCity.city}</h1>
+        <p>{currentCity?.country}</p>
+        <p className={style.temperatureTodayStyle}>
+          {currentCity.Metric?.Value}°{currentCity.Metric?.Unit}
+        </p>
+      </div>
+      <div className={style.iconContainer}>
+      <img className={style.iconImage} src={`/src/assets/weather-icons/${getWeatherIconByNumber(currentCity?.weatherIcon || 1)}`} />
+      </div>
+    </div>
+  );
 };
 
 export default WeatherWidget;

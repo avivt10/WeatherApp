@@ -1,17 +1,21 @@
+.searchWrapper {
+  position: relative;
+}
+
 input.inputBox,
 textarea {
-    background-color: #202C3C;
-    color: #747A86;
+  background-color: #202c3c;
+  color: #747a86;
 }
 
 ::placeholder {
-    color: #747A86;
-    opacity: 1;
+  color: #747a86;
+  opacity: 1;
 }
 
-.inputBox{
-    width: 100%;
-    border:none;
-    padding: 15px;
-    border-radius: 15px;
+.inputBox {
+  width: 100%;
+  border: none;
+  padding: 15px;
+  border-radius: 15px;
 }
