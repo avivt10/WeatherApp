@@ -1,6 +1,5 @@
-import { ICurrentCityPropsModel } from './currentCityPropsModel';
+import { ICurrentCityPropsModel } from "./currentCityPropsModel";
 
 export interface ICurrentCityModel {
-    currentCity: ICurrentCityPropsModel;
-  }
-  
+  currentCity: ICurrentCityPropsModel;
+}
