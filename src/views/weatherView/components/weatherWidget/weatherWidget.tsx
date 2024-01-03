@@ -5,8 +5,7 @@ import { favoritePropsModel } from "../../../../redux/models/favorite.model";
 import { ISearchModel } from "../search/models/search.model";
 import style from "./weatherWidget.module.css";
 import { ICurrentCityModel } from './../../models/currentCityModel';
-import getWeatherIconByNumber from "../fullForecast/functions/getWeatherForecastIconByNumber";
-
+import getWeatherIconByNumber from "../../../../shared/functions/getWeatherForecastIconByNumber";
 
 const WeatherWidget = ({ currentCity }: ICurrentCityModel) => {
   const onChangeMode = useAppSelector((state) => state.switchModeSlice.onChangeMode);

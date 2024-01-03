@@ -7,7 +7,6 @@
 .outlet-container {
   width: calc(100% - 150px);
   padding: 24px 8px 24px 0;
-  max-height: calc(100vh - 28px);
   overflow-y: auto;
 }
 @media screen and (max-width: 550px) {

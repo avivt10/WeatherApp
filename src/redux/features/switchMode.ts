@@ -1,8 +1,5 @@
 import {PayloadAction, createSlice } from "@reduxjs/toolkit"
-
-export interface switchModeModel{
-    onChangeMode: boolean
-}
+import { switchModeModel } from "../models/switchMode.model";
 
 const initialState : switchModeModel = {
   onChangeMode: false

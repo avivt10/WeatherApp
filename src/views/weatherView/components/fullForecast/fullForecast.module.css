@@ -18,10 +18,6 @@
   font-weight: 500;
 }
 
-.imageIcon{
-  width: 100%;
-}
-
 @media screen and (max-width: 790px) {
     .fullForceCastContainer{
       display: flex;
