@@ -5,25 +5,25 @@
   margin-top: 100px;
 }
 
-.detailsWeatherLight{
+.detailsWeatherLight {
   display: flex;
   text-align: center;
   justify-content: space-around;
   align-items: center;
   margin-top: 100px;
-  color: #0B131E !important;
+  color: #0b131e !important;
 }
 
 .iconContainer {
   z-index: 0;
 }
 
-.cityStyle{
+.cityStyle {
   font-size: 45px;
-  font-weight:400;
+  font-weight: 400;
 }
 
-.temperatureTodayStyle{
+.temperatureTodayStyle {
   font-size: 50px;
   font-weight: 700;
 }
@@ -35,16 +35,16 @@
 }
 
 @media screen and (max-width: 550px) {
-  .detailsWeather{
+  .detailsWeather {
     display: flex;
     flex-direction: column;
     text-align: center;
   }
-  .icon{
+  .icon {
     width: 50px;
     height: 40px;
   }
-  .iconImage{
+  .iconImage {
     margin-top: 40px;
   }
 }

@@ -1,6 +1,5 @@
 export interface IMetricModel {
-    Value: number;
-    Unit: string;
-    UnitType: number;
-  }
-  
+  Value: number;
+  Unit: string;
+  UnitType: number;
+}

@@ -1,3 +1,3 @@
 export interface WeatherImagesModel {
-    [key: number]: string;
-  }
+  [key: number]: string;
+}

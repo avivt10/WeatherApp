@@ -13,7 +13,7 @@ const FullForecast = () => {
 
   const getFullForecast = async () => {
     try {
-      const {data} = await axios.get(
+      const { data } = await axios.get(
         `http://dataservice.accuweather.com/forecasts/v1/daily/5day/${currentCity.key}?apikey=${import.meta.env.VITE_APIKEY}&metric=true`
       );
       const object = [];
@@ -38,21 +38,21 @@ const FullForecast = () => {
   useEffect(() => {
     getFullForecast();
   }, [currentCity]);
- 
+
   return (
-      <div className={style.fullForceCastContainer}>
-        {data?.map((item,i) => {
-          return (
-            <div key={i} className={`d-flex flex-column align-items-center ${style.FullForeCastStyle}`}>
-              <p className={style.dateStyle}> {item.date}</p>
-              <img src={`/src/assets/weather-icons/${getWeatherIconByNumber(item.numberIcon)}`} alt={`${item.numberIcon}`} />
-              <p className={style.temperatureStyle}>
-                {item.temperatureValue}°{item.temperatureUnit} 
-              </p>
-            </div>
-          );
-        })}
-      </div>
+    <div className={style.fullForceCastContainer}>
+      {data?.map((item, i) => {
+        return (
+          <div key={i} className={`d-flex flex-column align-items-center ${style.FullForeCastStyle}`}>
+            <p className={style.dateStyle}> {item.date}</p>
+            <img src={`/src/assets/weather-icons/${getWeatherIconByNumber(item.numberIcon)}`} alt={`${item.numberIcon}`} />
+            <p className={style.temperatureStyle}>
+              {item.temperatureValue}°{item.temperatureUnit}
+            </p>
+          </div>
+        );
+      })}
+    </div>
   );
 };
 
