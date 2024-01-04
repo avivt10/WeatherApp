@@ -12,8 +12,11 @@ import Loader from "../../shared/components/loader";
 const WeatherView = () => {
   const dispatch = useAppDispatch();
   const { currentCity } = useAppSelector((state) => state.citySlice);
+  const { unitMetric } = useAppSelector((state) => state.tempUnitSlice);
   const [mappedCurrentCity, setMappedCurrentCity] = useState<ICurrentCityPropsModel>();
   const [isLoading, setLoading] = useState(true)
+  const [temperatureValue, setTemperatureValue] = useState(0);
+  const [temperatureUnit, setTemperatureUnit] = useState("");
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -47,7 +50,7 @@ const WeatherView = () => {
   // on init get Tel Aviv
   const getCityByDefault = async (key: string) => {
     try {
-      const { data } = await axios.get(`http://dataservice.accuweather.com/locations/v1/${key}?apikey=${import.meta.env.VITE_APIKEY}`)
+      const { data } = await axios.get(`https://dataservice.accuweather.com/locations/v1/${key}?apikey=${import.meta.env.VITE_APIKEY}`)
       dispatch(
         onChangeCurrentCity({
           currentCity: {
@@ -65,7 +68,7 @@ const WeatherView = () => {
 
   const getCityDetailsByLocationKey = async (key: string) => {
     try {
-      const { data } = await axios.get(`http://dataservice.accuweather.com/locations/v1/${key}?apikey=${import.meta.env.VITE_APIKEY}`)
+      const { data } = await axios.get(`https://dataservice.accuweather.com/locations/v1/${key}?apikey=${import.meta.env.VITE_APIKEY}`)
       dispatch(
         onChangeCurrentCity({
           currentCity: {
@@ -85,7 +88,7 @@ const WeatherView = () => {
   const getCityDetailsByLocation = async (latitude: number, longitude: number) => {
     try {
       const { data } = await axios.get(
-        `http://dataservice.accuweather.com/locations/v1/cities/geoposition/search?apikey=${import.meta.env.VITE_APIKEY}&q=${latitude},${longitude}`
+        `https://dataservice.accuweather.com/locations/v1/cities/geoposition/search?apikey=${import.meta.env.VITE_APIKEY}&q=${latitude},${longitude}`
       );
       dispatch(
         onChangeCurrentCity({
@@ -106,13 +109,23 @@ const WeatherView = () => {
     if (currentCity.key) {
       getConditions();
     }
-  }, [currentCity]);
+  }, [currentCity,unitMetric]);
 
 
   const getConditions = async () => {
     try {
       const { data } = await axios.get(
-        `http://dataservice.accuweather.com/currentconditions/v1/${currentCity.key}?apikey=${import.meta.env.VITE_APIKEY}`
+        `https://dataservice.accuweather.com/currentconditions/v1/${currentCity.key}?apikey=${import.meta.env.VITE_APIKEY}`
+      );
+      setTemperatureValue(
+        unitMetric
+          ? data[0].Temperature.Metric.Value
+          : data[0].Temperature.Imperial.Value
+      );
+      setTemperatureUnit(
+        unitMetric
+          ? data[0].Temperature.Metric.Unit
+          : data[0].Temperature.Imperial.Unit
       );
       setMappedCurrentCity({
         city: currentCity.city,
@@ -132,7 +145,7 @@ const WeatherView = () => {
       <Search />
       {mappedCurrentCity && !isLoading ? (
         <React.Fragment>
-          <WeatherWidget currentCity={mappedCurrentCity} />
+          <WeatherWidget currentCity={mappedCurrentCity} temperatureValue={temperatureValue} temperatureUnit={temperatureUnit}/>
           <FullForecast />
         </React.Fragment>
       ) :

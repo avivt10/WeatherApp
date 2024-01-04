@@ -19,17 +19,17 @@ const FavoritesList = () => {
   return (
     <div>
       {
-        !isLoading ? 
-      <div className="container">
-        <div className="row gap-2">
-          {favoritesArray.map((favorite) => (
-            <div key={favorite.key} className="col-md-3 mb-4">
-              <FavoriteItem favorite={favorite} />
+        !isLoading ?
+          <div className="container">
+            <div className="row gap-2">
+              {favoritesArray.map((favorite) => (
+                <div key={favorite.key} className="col-md-3 mb-4">
+                  <FavoriteItem favorite={favorite} />
+                </div>
+              ))}
             </div>
-          ))}
-        </div>
-      </div> : 
-      <Loader/>
+          </div> :
+          <Loader />
       }
     </div>
   );

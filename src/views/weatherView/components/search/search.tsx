@@ -15,7 +15,7 @@ const Search = () => {
     try {
       if (value) {
         const { data } = await axios.get(
-          `http://dataservice.accuweather.com/locations/v1/cities/autocomplete?apikey=${import.meta.env.VITE_APIKEY}&q=${value}`
+          `https://dataservice.accuweather.com/locations/v1/cities/autocomplete?apikey=${import.meta.env.VITE_APIKEY}&q=${value}`
         );
         const mappedSearch: ISearchModel[] = data.map((el: mappedSearchModel) => ({
           key: el.Key,

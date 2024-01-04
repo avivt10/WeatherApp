@@ -1,4 +1,4 @@
-.side-bar-container{
+.side-bar-container {
   padding: 24px 0;
 }
 
@@ -42,7 +42,7 @@
   color: white;
 }
 
-.icons-style a.active path{
+.icons-style a.active path {
   fill: white;
 }
 
@@ -62,7 +62,7 @@
   }
   .outlet-container {
     width: 100% !important;
-    padding: 0 24px!important;
+    padding: 0 24px !important;
   }
 
   .side-bar-wrapper {
@@ -83,11 +83,11 @@
     background-color: transparent;
     border-radius: 18px;
     margin: 0 !important;
-  } 
+  }
 
   .side-bar-container {
     width: 100% !important;
-    padding: 0 !important; 
+    padding: 0 !important;
     height: max-content !important;
   }
 
@@ -107,7 +107,6 @@
   .buttonSwitch {
     display: contents;
   }
-
 }
 
 .buttonSwitch {
@@ -136,8 +135,8 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: #0B131E ;
-  transition: .4s;
+  background-color: #0b131e;
+  transition: 0.4s;
   border-radius: 30px;
 }
 .slider:before {
@@ -150,7 +149,7 @@
   bottom: 2px;
   z-index: 2;
   background-color: #e8e8e8;
-  transition: .4s;
+  transition: 0.4s;
 }
 
 .sun svg {
@@ -177,7 +176,6 @@
 }
 
 @keyframes rotate {
- 
   0% {
     transform: rotate(0);
   }
@@ -192,7 +190,6 @@
 }
 
 @keyframes tilt {
- 
   0% {
     transform: rotate(0deg);
   }
@@ -211,11 +208,11 @@
 }
 
 .input:checked + .slider {
-  background-color: #0B131E ;
+  background-color: #0b131e;
 }
 
 .input:focus + .slider {
-  box-shadow: 0 0 1px #0B131E ;
+  box-shadow: 0 0 1px #0b131e;
 }
 
 .input:checked + .slider:before {
@@ -224,4 +221,4 @@
 
 body.light-mode {
   background-color: white !important;
-} 
+}
