@@ -9,6 +9,7 @@ import getWeatherIconByNumber from "../../../../shared/functions/getWeatherForec
 import { toast } from "react-toastify";
 import { onChangeCurrentCity } from "../../../../redux/features/citySlice";
 import { useNavigate } from "react-router-dom";
+import { useAppSelector } from "../../../../redux/hooks";
 
 const FavoriteItem = ({ favorite }: FavoritesItemProps) => {
   const [temperatureValue, setTemperatureValue] = useState();
@@ -16,13 +17,22 @@ const FavoriteItem = ({ favorite }: FavoritesItemProps) => {
   const [temperatureUnit, setTemperatureUnit] = useState("");
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  
+  const { unitMetric } = useAppSelector((state) => state.tempUnitSlice);
+
   useEffect(() => {
     const getCurrentConditions = async () => {
       try {
-        const { data } = await axios.get(`http://dataservice.accuweather.com/currentconditions/v1/${favorite.key}?apikey=${import.meta.env.VITE_APIKEY}`);
-        setTemperatureValue(data[0].Temperature.Metric.Value);
-        setTemperatureUnit(data[0].Temperature.Metric.Unit);
+        const { data } = await axios.get(`https://dataservice.accuweather.com/currentconditions/v1/${favorite.key}?apikey=${import.meta.env.VITE_APIKEY}`);
+        setTemperatureValue(
+          unitMetric
+            ? data[0].Temperature.Metric.Value
+            : data[0].Temperature.Imperial.Value
+        );
+        setTemperatureUnit(
+          unitMetric
+            ? data[0].Temperature.Metric.Unit
+            : data[0].Temperature.Imperial.Unit
+        );
         setWeatherIcon(data[0].WeatherIcon)
       } catch (err) {
         toast(err as string)
@@ -31,9 +41,13 @@ const FavoriteItem = ({ favorite }: FavoritesItemProps) => {
     getCurrentConditions();
   }, []);
 
+
   const removeCityFromFavorites = (key: string) => {
-    dispatch(onDeleteFavorite({ Key: key }));
-  };
+    const isConfirmed = window.confirm("Are you sure you want to delete the city from favorites?");
+    if (isConfirmed) {
+      dispatch(onDeleteFavorite({ Key: key }));
+    }
+  }
 
   const chooseCurrentCity = () => {
     dispatch(onChangeCurrentCity({
@@ -58,7 +72,7 @@ const FavoriteItem = ({ favorite }: FavoritesItemProps) => {
           </div>
           <div className={style.favoriteCard} onClick={() => chooseCurrentCity()}>
             <h3 className="mt-4">{favorite.cityName}</h3>
-            <img src={`/src/assets/weather-icons/${getWeatherIconByNumber(weatherIcon)}`} className={style.favoriteIcon} alt={`${weatherIcon}`} />
+            <img src={`/weather-icons/${getWeatherIconByNumber(weatherIcon)}`} className={style.favoriteIcon} alt={`${weatherIcon}`} />
             <h4 className={style.temperatureStyle}>
               {temperatureValue}°{temperatureUnit}
             </h4>
