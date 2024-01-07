@@ -2,11 +2,11 @@ import { createSlice } from "@reduxjs/toolkit";
 import { ITempUnitModel } from "../models/tempUnit.model";
 
 const initialState: ITempUnitModel = {
-  unitMetric: true
+  unitMetric: true,
 };
 
 const tempUnitSlice = createSlice({
-  name: 'tempUnit',
+  name: "tempUnit",
   initialState: initialState,
 
   // actions to change the state
@@ -21,13 +21,10 @@ const tempUnitSlice = createSlice({
 
     onTurnToFahrenheit: (state) => {
       state.unitMetric = false;
-    }
-  }
+    },
+  },
 });
 
-export const {
-  onToggleUnit,
-  onTurnToCelsius,
-  onTurnToFahrenheit
-} = tempUnitSlice.actions;
+export const { onToggleUnit, onTurnToCelsius, onTurnToFahrenheit } =
+  tempUnitSlice.actions;
 export default tempUnitSlice.reducer;

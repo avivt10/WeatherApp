@@ -1,3 +1,3 @@
 export interface ITempUnitModel {
-    unitMetric: boolean;
-  }
+  unitMetric: boolean;
+}

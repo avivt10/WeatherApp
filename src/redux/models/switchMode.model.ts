@@ -1,3 +1,3 @@
-export interface switchModeModel{
-    onChangeMode: boolean
+export interface switchModeModel {
+  onChangeMode: boolean;
 }

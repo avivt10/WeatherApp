@@ -1,7 +1,7 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import { ISearchModel } from "../../views/weatherView/components/search/models/search.model";
 
- interface cityModel {
+interface cityModel {
   currentCity: ISearchModel;
 }
 

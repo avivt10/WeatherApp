@@ -5,9 +5,9 @@ export interface favoritePropsModel {
 }
 
 export interface favoriteListModel {
-  favorite: favoritePropsModel
+  favorite: favoritePropsModel;
 }
 
 export interface favoritesListModel {
-  favorites: favoritePropsModel[]
+  favorites: favoritePropsModel[];
 }
