@@ -1,16 +1,17 @@
 import { Outlet } from "react-router-dom";
 import SideBar from "./sideBar";
-import "./layout.css";
+import style from "./layout.module.css";
+
 const Layout = () => {
   return (
     <div className="d-flex">
       {/* side bar */}
-      <div className="side-bar-container">
+      <div className={style.sideBarContainer}>
         <SideBar />
       </div>
 
       {/* outlet */}
-      <div className="container outlet-container">
+      <div className={`container ${style.outletContainer}`}>
         <Outlet />
       </div>
       <></>

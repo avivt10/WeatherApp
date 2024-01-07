@@ -1,0 +1,23 @@
+.sideBarContainer {
+  width: 160px;
+  padding: 24px 0;
+  height: 100vh;
+}
+
+.outletContainer {
+  width: calc(100% - 150px);
+  padding: 24px 8px 24px 0;
+  overflow-y: auto;
+}
+@media screen and (max-width: 550px) {
+  .outletContainer {
+    max-height: fit-content !important;
+    width: 100% !important;
+    padding: 0 24px !important;
+  }
+  .sideBarContainer {
+    width: 100% !important;
+    padding: 0 !important;
+    height: max-content !important;
+  }
+}

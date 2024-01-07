@@ -1,5 +1,5 @@
 export interface sideBarConfigModel {
-    icon: number,
-    label: string,
-    route: string;
-  }
+  icon: number;
+  label: string;
+  route: string;
+}

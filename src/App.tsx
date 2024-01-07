@@ -5,7 +5,7 @@ const App = () => {
     return (
         <>
             <AppRoutes />
-            <ToastContainer theme="dark" position="bottom-right"/>
+            <ToastContainer theme="dark" position="bottom-right" />
         </>
     );
 };

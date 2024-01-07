@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import "./sideBar.css";
+import style from "./sideBar.module.css";
 import WindIcon from "../../assets/icons/3D/windIcon3D";
 import SunnyCloudyIcon from "../../assets/icons/sunnyCloudyIcon";
 import FavoritesIcon from "../../assets/icons/favoritesIcon";
@@ -24,13 +24,13 @@ const Sidebar = () => {
 
   const handleSwitchChange = () => {
     setIsLightMode((prevMode) => !prevMode);
-    document.body.classList.toggle("light-mode");
+    document.body.classList.toggle("lightMode")
   };
 
   return (
-    <nav className={`side-bar-wrapper ${isLightMode ? 'light-mode' : ''}`}>
+    <nav className={`${style.sideBarWrapper} ${isLightMode ? `${style.lightMode}` : ''}`}>
       {/*  logo */}
-      <div className="wind-icon">
+      <div className={style.windIcon}>
         <Link to={"/"}>
           <WindIcon width={50} height={50} />
         </Link>
@@ -39,7 +39,7 @@ const Sidebar = () => {
       {/* list items */}
       <ul className="nav flex-column">
         {sideBarConfig.map((item, index) => (
-          <li key={index} className="icons-style">
+          <li key={index} className={style.iconsStyle}>
             <NavLink to={item.route}>
               <span className="d-flex justify-content-center align-items-center">
                 {icons[item.icon]}
@@ -50,16 +50,16 @@ const Sidebar = () => {
         ))}
 
         {/* switcher light/dark mode */}
-        <li className="buttonSwitch">
-          <label className="switch">
-            <span className={`sun ${isLightMode ? 'active' : ''}`}>
+        <li className={style.buttonSwitch}>
+          <label className={style.switch}>
+            <span className={`${style.sun} ${isLightMode ? 'active' : ''}`}>
               <SunnIcon />
             </span>
-            <span className={`moon ${isLightMode ? 'active' : ''}`}>
+            <span className={`${style.moon} ${isLightMode ? 'active' : ''}`}>
               <MoonIcon />
             </span>
-            <input type="checkbox" className="input" onChange={handleSwitchChange} />
-            <span className="slider"></span>
+            <input type="checkbox" className={style.input} onChange={handleSwitchChange} />
+            <span className={style.slider}></span>
           </label>
         </li>
       </ul>

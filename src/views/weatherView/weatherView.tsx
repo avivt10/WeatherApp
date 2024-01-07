@@ -109,7 +109,7 @@ const WeatherView = () => {
     if (currentCity.key) {
       getConditions();
     }
-  }, [currentCity,unitMetric]);
+  }, [currentCity, unitMetric]);
 
 
   const getConditions = async () => {
@@ -145,7 +145,7 @@ const WeatherView = () => {
       <Search />
       {mappedCurrentCity && !isLoading ? (
         <React.Fragment>
-          <WeatherWidget currentCity={mappedCurrentCity} temperatureValue={temperatureValue} temperatureUnit={temperatureUnit}/>
+          <WeatherWidget currentCity={mappedCurrentCity} temperatureValue={temperatureValue} temperatureUnit={temperatureUnit} />
           <FullForecast />
         </React.Fragment>
       ) :

@@ -9,7 +9,7 @@ const AppRoutes = () => {
 
   return (
     // must add suspense while using lazy loading 
-    <Suspense fallback={<Loader/>}>
+    <Suspense fallback={<Loader />}>
       <BrowserRouter>
         <Routes>
           <Route path='/' element={<Layout />}>

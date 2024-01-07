@@ -2,6 +2,6 @@ import { ICurrentCityPropsModel } from "./currentCityPropsModel";
 
 export interface ICurrentCityModel {
   currentCity: ICurrentCityPropsModel;
-  temperatureValue: number,
-  temperatureUnit: string,
+  temperatureValue: number;
+  temperatureUnit: string;
 }
