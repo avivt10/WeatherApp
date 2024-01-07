@@ -10,6 +10,7 @@ const switchModeSlice = createSlice({
   initialState: initialState,
   // actions to change the state
   reducers: {
+    // 
     setChangeMode: (state, action: PayloadAction<boolean>) => {
       state.onChangeMode = action.payload;
     },

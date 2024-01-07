@@ -13,11 +13,7 @@ const WeatherWidget = ({ currentCity, temperatureValue, temperatureUnit }: ICurr
   const { favorites } = useAppSelector((state) => state.favoriteSlice);
   const dispatch = useAppDispatch();
 
-  const toggleFavorite = (
-    event: React.MouseEvent<HTMLDivElement, MouseEvent>,
-    city: ISearchModel
-  ) => {
-
+  const toggleFavorite = (event: React.MouseEvent<HTMLDivElement, MouseEvent>, city: ISearchModel) => {
     event.stopPropagation();
     if (favorites.some((favorite) => favorite.key === city.key)) {
       // remove from state

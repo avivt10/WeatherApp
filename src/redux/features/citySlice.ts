@@ -19,6 +19,7 @@ const citySlice = createSlice({
 
   // actions to change the state
   reducers: {
+    // 
     onChangeCurrentCity: (state, action: PayloadAction<cityModel>) => {
       state.currentCity = action.payload.currentCity;
     },

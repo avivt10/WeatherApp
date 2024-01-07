@@ -11,10 +11,6 @@ const tempUnitSlice = createSlice({
 
   // actions to change the state
   reducers: {
-    onToggleUnit: (state) => {
-      state.unitMetric = !state.unitMetric;
-    },
-
     onTurnToCelsius: (state) => {
       state.unitMetric = true;
     },
@@ -25,6 +21,6 @@ const tempUnitSlice = createSlice({
   },
 });
 
-export const { onToggleUnit, onTurnToCelsius, onTurnToFahrenheit } =
+export const { onTurnToCelsius, onTurnToFahrenheit } =
   tempUnitSlice.actions;
 export default tempUnitSlice.reducer;

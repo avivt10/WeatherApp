@@ -22,7 +22,6 @@ const Search = () => {
           city: el.LocalizedName,
           country: el.Country.LocalizedName,
         }));
-
         setResults(mappedSearch);
       } else {
         setResults([]);

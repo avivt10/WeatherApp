@@ -10,12 +10,8 @@ import { ISearchModel } from "../models/search.model";
 import { onChangeCurrentCity } from "../../../../../redux/features/citySlice";
 import { autoCompleteValuesModel } from "./models/autoCompleteValuesModel";
 
-const AutoCompleteValues = ({
-  results,
-  setInput,
-  setResults,
-}: autoCompleteValuesModel) => {
-  const dispatch = useAppDispatch();
+const AutoCompleteValues = ({ results, setInput, setResults }: autoCompleteValuesModel) => {
+  const dispatch = useAppDispatch(); 
   const { favorites } = useAppSelector((state) => state.favoriteSlice);
 
   const navigateToCity = (city: ISearchModel) => {
